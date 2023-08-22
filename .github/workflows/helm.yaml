@@ -10,13 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Set up AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1
-
       - name: Install Helm
         run: |
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
@@ -29,16 +22,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      
-      - name: Set up AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1
+
+      - name: Install and configure kubectl
+        run: |
+          VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+          curl https://storage.googleapis.com/kubernetes-release/release/$VERSION/bin/linux/amd64/kubectl \
+              --progress-bar \
+              --location \
+              --remote-name
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+          echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > kubeconfig.yaml
+
+      - name: Set KUBECONFIG
+        run: |
+          echo "KUBECONFIG=${{ github.workspace }}/kubeconfig.yaml" >> $GITHUB_ENV
 
       - uses: actions-hub/kubectl@master
         env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+          KUBECONFIG: ${{ github.workspace }}/kubeconfig.yaml
         with:
           args: get pods
