@@ -12,7 +12,7 @@ jobs:
       
     - name: Set up kubectl
       run: |
-        mkdir -p $HOME/.kube
+        mkdir $HOME/.kube
         echo ${{ secrets.KUBE_CONFIG }} | base64 --decode > ${HOME}/.kube/config
         cat ${HOME}/.kube/config
         kubectl config use-context kubeconfig
