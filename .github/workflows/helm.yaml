@@ -34,7 +34,6 @@ jobs:
           chmod +x get_helm.sh
           ./get_helm.sh
 
-
   get-pods:
     name: Get pods
     runs-on: ubuntu-latest
@@ -59,3 +58,8 @@ jobs:
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
           aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
+          kubectl get pods
+
+      - name: Get pods
+        run: |
+          kubectl get pods
