@@ -1,0 +1,28 @@
+name: Helm Deploy
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+      
+    - name: Set up kubectl
+      uses: azure/k8s-set-context@v1
+      with:
+        method: kubeconfig
+        kubeconfig: ${{secrets.KUBECONFIG}}
+    
+    - name: Install Helm
+      run: |
+        curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+        chmod +x get_helm.sh
+        ./get_helm.sh
+    
+    - name: Run Helm Install
+      run: |
+        helm repo add stable https://charts.helm.sh/stable
+        helm install my-release stable/jenkins
