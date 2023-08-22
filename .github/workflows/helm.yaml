@@ -37,7 +37,7 @@ jobs:
       - name: Run Helm Install
         run: |
           helm repo add stable https://charts.helm.sh/stable
-          helm install my-release stable/nginx-ingress
+          helm install Hello chartmuseum/helloworld
 
   get-pods:
     name: Get pods
