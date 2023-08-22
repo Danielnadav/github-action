@@ -13,7 +13,7 @@ jobs:
     - name: Set up kubectl
       run: |
         mkdir -p $HOME/.kube
-        cp ~/.kube/config | base64 -d > $HOME/.kube/config
+        cp -R ~/.kube/config | base64 -d > $HOME/.kube/config
         chmod 600 $HOME/.kube/config
         kubectl config use-context kubeconfig
     
