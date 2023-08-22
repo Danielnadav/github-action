@@ -44,3 +44,6 @@ jobs:
           KUBECONFIG: ${{ github.workspace }}/kubeconfig.yaml
         with:
           args: get pods
+      - name: Debug Kubeconfig
+        run: |
+          cat kubeconfig.yaml
