@@ -15,6 +15,7 @@ jobs:
         mkdir -p $HOME/.kube
         echo "$KUBE_CONFIG_DATA" > $HOME/.kube/config
         chmod 600 $HOME/.kube/config
+        kubectl config use-context $HOME/.kube/config
     
     - name: Install Helm
       run: |
