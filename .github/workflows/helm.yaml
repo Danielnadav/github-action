@@ -14,7 +14,7 @@ jobs:
       uses: azure/k8s-set-context@v1
       with:
         method: kubeconfig
-        kubeconfig: ${{secrets.KUBECONFIG}}
+        kubeconfig: ~/.kube/config
     
     - name: Install Helm
       run: |
