@@ -1,9 +1,42 @@
-name: Get pods
+name: Kubernetes Workflow
+
 on: [push]
 
 jobs:
   deploy:
     name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+
+      - name: Install and configure kubectl
+        run: |
+          VERSION=$(curl --silent https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+          curl https://storage.googleapis.com/kubernetes-release/release/$VERSION/bin/linux/amd64/kubectl \
+              --progress-bar \
+              --location \
+              --remote-name
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+          echo ${{ secrets.KUBE_CONFIG }} | base64 --decode > kubeconfig.yaml 
+
+      - name: Install Helm
+        run: |
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          chmod +x get_helm.sh
+          ./get_helm.sh
+
+      - name: Run Helm Install
+        run: |
+          helm repo add stable https://charts.helm.sh/stable
+          helm install my-release stable/nginx-ingress
+
+  get-pods:
+    name: Get pods
     runs-on: ubuntu-latest
 
     steps:
