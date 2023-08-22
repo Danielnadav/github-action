@@ -13,8 +13,8 @@ jobs:
     - name: Set up kubectl
       run: |
         mkdir -p $HOME/.kube
-        cp -R ~/.kube/config | base64 -d > $HOME/.kube/config
-        chmod 600 $HOME/.kube/config
+        echo ${{ secret.KUBE_CONFIG }} | base64 --decode > ${HOME}/.kube/config
+        cat ${HOME}/.kube/config
         kubectl config use-context kubeconfig
     
     - name: Install Helm
