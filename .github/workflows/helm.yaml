@@ -10,11 +10,6 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
       
-    - name: Set up kubectl
-      run: |
-        mkdir -p $HOME/.kube
-        cp $GITHUB_WORKSPACE/.kube/config $HOME/.kube/config
-    
     - name: Install Helm
       run: |
         curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
