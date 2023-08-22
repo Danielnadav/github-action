@@ -13,9 +13,9 @@ jobs:
     - name: Set up kubectl
       run: |
         mkdir -p $HOME/.kube
-        echo "$KUBE_CONFIG_DATA" > $HOME/.kube/config
+        echo "$KUBE_CONFIG_DATA" | base64 -d > $HOME/.kube/config
         chmod 600 $HOME/.kube/config
-        kubectl config use-context $HOME/.kube/config
+        kubectl config use-context kubeconfig
     
     - name: Install Helm
       run: |
@@ -26,4 +26,4 @@ jobs:
     - name: Run Helm Install
       run: |
         helm repo add stable https://charts.helm.sh/stable
-        helm install my-release stable/nginx-ingress
+        helm install my-release stable/nginx
