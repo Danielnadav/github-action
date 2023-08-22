@@ -34,10 +34,6 @@ jobs:
           chmod +x get_helm.sh
           ./get_helm.sh
 
-      - name: Run Helm Install
-        run: |
-          # helm repo add stable https://charts.helm.sh/stable
-          helm install Hello chartmuseum/helloworld
 
   get-pods:
     name: Get pods
@@ -63,7 +59,3 @@ jobs:
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
           aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
-
-      - uses: actions-hub/kubectl@master
-        with:
-          args: get pods
