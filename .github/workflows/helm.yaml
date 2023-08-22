@@ -37,6 +37,7 @@ jobs:
       - name: Set KUBECONFIG
         run: |
           echo "KUBECONFIG=${{ github.workspace }}/kubeconfig.yaml" >> $GITHUB_ENV
+          kubectl get pods
 
       - uses: actions-hub/kubectl@master
         env:
