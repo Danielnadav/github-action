@@ -1,14 +1,17 @@
-name: Kubernetes Workflow
+name: Deploy Helm Chart
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  get-pods:
-    name: aws setup and access to eks
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Set up AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -27,35 +30,22 @@ jobs:
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
 
-      - name: Update AWS CLI
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          sudo ./aws/install --update
-      - name: Set KUBECONFIG
+      - name: Update Kubeconfig
         run: |
           aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
-          # echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
-          
 
-      - name: Debug Kubeconfig
-        run: |
-          cat $HOME/.kube/config
-          echo "KUBECONFIG=$KUBECONFIG"
-          kubectl get nodes
-      - name: run kubectl get pods and ns 
-        run: |
-          kubectl get pods
-
-      - name: helm ls
-        run: |
-          helm ls
-      - name: k get ns
-        run: |
-          kubectl get ns
       - name: Print Repository Structure
         run: ls -R
 
-      - name: k apply -f
-        run: |
-          helm install pgadmin -f github-action/.github/workflows/values.yaml .
+      - name: Deploy Helm Chart
+        uses: bitovi/github-actions-deploy-eks-helm@v1.0.0
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1
+          cluster-name: dev-cluster
+          cluster-role-arn: $
+          config-files: github_action/values.yaml  # Update path to your values file
+          chart-path: github_action/chart    # Update path to your Helm chart
+          namespace: default         # Update namespace
+          name: pgadmin           # Update release name
