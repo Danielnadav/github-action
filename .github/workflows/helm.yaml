@@ -36,6 +36,7 @@ jobs:
         run: |
           aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
           # echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
+          kubectl get svc
 
 
  
