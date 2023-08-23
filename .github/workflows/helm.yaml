@@ -29,7 +29,7 @@ jobs:
 
       - name: Set KUBECONFIG
         run: |
-          aws eks --region eu-north-1 update-kubeconfig --name your-cluster-name
+          aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
           echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
 
       - name: Get pods
