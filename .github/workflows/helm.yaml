@@ -53,10 +53,10 @@ jobs:
       - name: k get ns
         run: |
           kubectl get ns
-      # - name: Print Repository Structure
-      #   run: ls -R
+      - name: Print Repository Structure
+        run: ls -R | grep service.yaml
 
       - name: k apply -f
         run: |
-          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
 
