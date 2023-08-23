@@ -1,3 +1,0 @@
-              - name: Helm Deploy
-                uses: vimeda/helm@v1.7.0
-            

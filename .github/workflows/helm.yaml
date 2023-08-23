@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   get-pods:
-    name: Get pods
+    name: aws setup
     runs-on: ubuntu-latest
 
     steps:
@@ -46,7 +46,7 @@ jobs:
       - name: run kubectl get pods and ns 
         run: |
           kubectl get pods
-          
+
       - name: helm ls
         run: |
           helm ls
