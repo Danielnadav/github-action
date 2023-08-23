@@ -55,4 +55,4 @@ jobs:
           kubectl get ns
       - name: k apply -f
         run: |
-          helm install pgadmin -f values.yaml .
+          helm install pgadmin .github/workflows/values.yaml -f  .
