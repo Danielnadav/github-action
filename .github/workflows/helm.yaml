@@ -32,19 +32,21 @@ jobs:
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
           sudo ./aws/install --update
-
-
+          cat $HOME/.kube/config
+          echo "KUBECONFIG=$KUBECONFIG"
       - name: Set KUBECONFIG
         run: |
           aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
           # echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
 
-      - name: Get pods using actions-hub/kubectl
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        with:
-          args: get svc
+ 
+
+      # - name: Get pods using actions-hub/kubectl
+      #   uses: actions-hub/kubectl@master
+      #   env:
+      #     KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      #   with:
+      #     args: get svc
       - name: Debug Kubeconfig
         run: |
           cat $HOME/.kube/config
