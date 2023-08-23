@@ -53,10 +53,10 @@ jobs:
       - name: k get ns
         run: |
           kubectl get ns
-      - name: Print Repository Structure
-        run: ls -R
+      # - name: Print Repository Structure
+      #   run: ls -R
 
       - name: k apply -f
         run: |
-          kubectl apply -f /templates 
+          kubectl apply -f deployment.yaml
 
