@@ -46,8 +46,13 @@ jobs:
       - name: run kubectl get pods and ns 
         run: |
           kubectl get pods
-          kubectl get ns
+          
+      - name: helm ls
+        run: |
           helm ls
+      - name: k get ns
+        run: |
+          kubectl get ns
       # - name: Get pods using actions-hub/kubectl
       #   uses: actions-hub/kubectl@master
       #   env:
