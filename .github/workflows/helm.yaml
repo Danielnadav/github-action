@@ -53,3 +53,6 @@ jobs:
       - name: k get ns
         run: |
           kubectl get ns
+      - name: k apply -f
+        run: |
+          helm install -f values.yaml .
