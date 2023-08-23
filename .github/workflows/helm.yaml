@@ -43,6 +43,8 @@ jobs:
           cat $HOME/.kube/config
           echo "KUBECONFIG=$KUBECONFIG"
           kubectl get nodes
+      - name: run kubectl get pods and ns 
+        run: |
           kubectl get pods
           kubectl get ns
       # - name: Get pods using actions-hub/kubectl
