@@ -55,7 +55,7 @@ jobs:
           kubectl get ns
       - name: Print Repository Structure
         run: ls -R
-        
+
       - name: k apply -f
         run: |
-          helm install pgadmin -f values.yaml .
+          helm install pgadmin -f github-action/.github/workflows/values.yaml .
