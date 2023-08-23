@@ -58,5 +58,5 @@ jobs:
 
       - name: k apply -f
         run: |
-          kubectl apply -f ./templates 
+          kubectl apply -f /templates 
 
