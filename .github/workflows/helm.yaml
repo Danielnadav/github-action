@@ -58,5 +58,6 @@ jobs:
 
       - name: k apply -f
         run: |
-          kubectl apply -f .github/workflows/service.yaml -n play
-          kubectl apply -f .github/workflows/deployment.yaml -n play
+          kubectl apply -f github-action/deploy/service.yaml -n play
+#           kubectl apply -f .github/workflows/deployment.yaml -n play
+# /Users/nadav/github_action/service.yaml
