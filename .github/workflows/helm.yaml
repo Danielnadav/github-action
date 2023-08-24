@@ -35,7 +35,7 @@ jobs:
       - name: Set KUBECONFIG
         run: |
           aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
-          # echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
+         
           
 
       - name: Debug Kubeconfig
@@ -59,7 +59,3 @@ jobs:
       - name: k apply -f
         run: |
           kubectl apply -f .github/workflows/service.yaml -n play
-#           kubectl apply -f .github/workflows/deployment.yaml -n play
-# /Users/nadav/github_action/service.yaml
-# /Users/nadav/github_action/service.yaml
-# /Users/nadav/github_action/github-action/.github/workflows/service.yaml
