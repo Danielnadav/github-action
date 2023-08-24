@@ -1,33 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pgadmin-{{ .Values.env }}
+  name: hello-world-deployment
   labels:
-    app: pgadmin
-    env: {{ .Values.env }}
+    app: hello-world
 spec:
-{{- if eq .Values.env "production" }}
-  replicas: 2
-{{- else }}
-  replicas: 1
-{{- end }}
   selector:
     matchLabels:
-      app: pgadmin
-      env: {{ .Values.env }}
+      app: hello-world
+  replicas: 2
   template:
     metadata:
       labels:
-        app: pgadmin
-        env: {{ .Values.env }}
+        app: hello-world
     spec:
       containers:
-      - name: pgadmin
-        image: dpage/pgadmin4
+      - name: hello-world
+        image: bhargavshah86/kube-test:v0.1
         ports:
         - containerPort: 80
-        env:
-          - name: PGADMIN_DEFAULT_PASSWORD
-            value: secrets123
-          - name: PGADMIN_DEFAULT_EMAIL
-            value: kirill@mkdev.me
+        resources:
+          limits:
+            memory: 256Mi
+            cpu: "250m"
+          requests:
+            memory: 128Mi
+            cpu: "80m"
