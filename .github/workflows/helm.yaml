@@ -59,3 +59,4 @@ jobs:
       - name: k apply -f
         run: |
           kubectl apply -f .github/workflows/service.yaml -n play
+          kubectl get pods -n play
