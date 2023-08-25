@@ -3,7 +3,7 @@ name: Kubernetes Workflow
 on: [push]
 
 jobs:
-  get-pods:
+  aws-access:
     name: aws setup and access to eks
     runs-on: ubuntu-latest
 
@@ -36,7 +36,6 @@ jobs:
         run: |
           aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
          
-          
 
       - name: Debug Kubeconfig
         run: |
@@ -59,4 +58,7 @@ jobs:
       - name: k apply -f
         run: |
           kubectl apply -f .github/workflows/service.yaml -n play
+
+      - name: k get pod
+        run: |
           kubectl get pods -n play
