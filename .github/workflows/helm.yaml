@@ -62,6 +62,8 @@ jobs:
       - name: k get pod
         run: |
           kubectl get pods -n play
-      - name: helm install pgadmin
+
+      - name: Helm Install/Upgrade Main Chart
         run: |
-          helm install pgadmin .github/workflows/Chart.yaml -n play
+          helm install my-chart .github/workflows/mkdev-pgadmin-0.1.0.tgz -n play
+
