@@ -65,5 +65,8 @@ jobs:
 
       - name: Helm Install/Upgrade Main Chart
         run: |
-          helm install my-chart .github/workflows/mkdev-pgadmin-0.1.0.tgz -n play
+          helm install pgadmin .github/workflows/mkdev-pgadmin-0.1.0.tgz -n play
 
+      # - name: Helm Install pgadmin with values file
+      #   run: |
+      #     helm install pgadmin .github/workflows/mkdev-pgadmin-0.1.0.tgz --values path/to/your/values.yaml
