@@ -70,17 +70,17 @@ jobs:
       # - name: Helm Install pgadmin with values file
       #   run: |
       #     helm install pgadmin .github/workflows/mkdev-pgadmin-0.1.0.tgz --values path/to/your/values.yaml
-      - name: Helm Install/Upgrade Main Chart
-        id: helm_install
+      - name: Helm Upgrade Main Chart
         run: |
-          helm install pgadmin .github/workflows/mkdev-pgadmin-0.1.0.tgz -n play
+          helm upgrade pgadmin .github/workflows/mkdev-pgadmin-0.1.0.tgz -n play
         continue-on-error: true
 
-      - name: Check Helm Installation
+      - name: Check Helm Upgrade
         run: |
           if [[ $? -eq 0 ]]; then
             helm ls
           else
-            echo "Helm chart installation failed."
+            echo "Helm chart upgrade failed."
           fi
-        if: steps.helm_install.outcome == 'success'
+        if: steps.helm_upgrade.outcome == 'success'
+
