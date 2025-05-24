@@ -1,6 +1,22 @@
-# name: Kubernetes Workflow
+name: Kubernetes Workflow
 
-# on: [push]
+on: [push]
+
+
+jobs:
+  deploy-local:
+    runs-on: self-hosted
+    name: Deploy to Docker Desktop Kubernetes
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set KUBECONFIG
+        run: echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
+
+      - name: Run kubectl command
+        run: kubectl get pods -A
 
 # jobs:
 #   aws-access:
@@ -86,17 +102,3 @@
 #           fi
 #         if: steps.helm_upgrade.outcome == 'success'
 
-jobs:
-  deploy-local:
-    runs-on: self-hosted
-    name: Deploy to Docker Desktop Kubernetes
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set KUBECONFIG
-        run: echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
-
-      - name: Run kubectl command
-        run: kubectl get pods -A
