@@ -22,7 +22,7 @@ jobs:
 
       - name: Terraform Init
         working-directory: ./runner
-        run: terraform init
+        run: ls -lth
 
       - name: Terraform Apply
         working-directory: ./runner
