@@ -1,0 +1,9 @@
+﻿{
+  "agentId": 2,
+  "agentName": "MacBook-Pro",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus14.actions.githubusercontent.com/aX6AGxlTIzwqnB78O7VB8eDkl6ZqDVRWYQyowtYoLBRcQO7rdW/",
+  "gitHubUrl": "https://github.com/Danielnadav/github-action",
+  "workFolder": "_work"
+}

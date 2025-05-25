@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "Danielnadav/github-action",
+  "pipelineDirectory": "github-action",
+  "workspaceDirectory": "github-action/github-action",
+  "repositories": {
+    "Danielnadav/github-action": {
+      "repositoryPath": "github-action/github-action",
+      "lastRunOn": "05/25/2025 02:11:41 +03:00"
+    }
+  },
+  "lastRunOn": "05/25/2025 02:11:41 +03:00"
+}
