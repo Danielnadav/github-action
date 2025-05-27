@@ -28,10 +28,7 @@ jobs:
       - name: Terraform Init
         working-directory: ./runner
         run: terraform init
-      - name: Terraform Plan
-        working-directory: ./runner
-        run: terraform plan -out=tfplan
 
       - name: Terraform Apply
         working-directory: ./runner
-        run: terraform apply -auto-approve
+        run: terraform plan
