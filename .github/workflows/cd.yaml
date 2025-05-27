@@ -1,4 +1,4 @@
-name: Self-hosted test
+name: linux test
 
 on: [push]
 
