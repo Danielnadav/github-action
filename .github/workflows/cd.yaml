@@ -15,6 +15,7 @@ jobs:
       - name: Run kubectl command
         run: kubectl get pods -A
       
+      
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
